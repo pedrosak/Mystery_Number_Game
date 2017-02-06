@@ -14,9 +14,11 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    numberengine.cpp
+    numberengine.cpp \
+    controlsengine.cpp
 
 HEADERS  += mainwindow.h \
-    numberengine.h
+    numberengine.h \
+    controlsengine.h
 
 FORMS    += mainwindow.ui

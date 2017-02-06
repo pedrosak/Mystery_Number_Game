@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "numberengine.h"
+#include "controlsengine.h"
 
 #include <QApplication>
 #include <QInputDialog>
@@ -11,12 +12,15 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     NumberEngine numberEngine;
+    ControlsEngine controlEngine;
+
     QHBoxLayout *digitLayout = new QHBoxLayout;
 
     QLabel *digit_one = new QLabel;
     QLabel *digit_two = new QLabel;
     QLabel *digit_three = new QLabel;
     QLabel *digit_four = new QLabel;
+
 
     numberEngine.randomNumberGenerator( 4 );
 
@@ -25,12 +29,16 @@ int main(int argc, char *argv[])
     digit_three->setText( numberEngine.getDigitAt( 2 ));
     digit_four->setText( numberEngine.getDigitAt( 3 ));
 
+    digitLayout->addWidget( controlEngine.CreateButton( "Up", 1 ) );
+    digitLayout->addWidget( controlEngine.CreateButton( "Submit", 2 ) );
+    digitLayout->addWidget( controlEngine.CreateButton( "Down", 3 ) );
     digitLayout->addWidget( digit_one );
     digitLayout->addWidget( digit_two );
     digitLayout->addWidget( digit_three );
     digitLayout->addWidget( digit_four );
 
     MainWindow w;
+
     w.centralWidget()->setLayout( digitLayout );
     w.show();
 
