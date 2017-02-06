@@ -14,6 +14,8 @@ public:
     void NumberEngine::randomNumberGenerator( int digit_size );
     QString NumberEngine::getDigitAt( int digit );
 
+    QString* NumberEngine::getGeneratedNumber();
+
 private:
     QString generated_number;
     int digit;

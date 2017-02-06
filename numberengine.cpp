@@ -32,7 +32,6 @@ void NumberEngine::randomNumberGenerator( int digit_size )
         // Generate Random Number
         for( int count_digit_size = 0; count_digit_size < digit_size; count_digit_size++ )
         {
-
                 digit = qrand() % highNumber + lowNumber;
                 generated_number += QString("%1").arg(digit);
         }
@@ -40,6 +39,7 @@ void NumberEngine::randomNumberGenerator( int digit_size )
         qDebug() <<  digit_size;
         qDebug() << generated_number;
         qDebug() << generated_number.size();
+
     }
 }
 
@@ -54,5 +54,11 @@ QString NumberEngine::getDigitAt( int digit_location )
     }
 
     return 0;
+}
+
+// Returns a pointer to the generated number string
+QString* NumberEngine::getGeneratedNumber()
+{
+    return &generated_number;
 }
 
