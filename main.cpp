@@ -7,10 +7,11 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    ControlsEngine controlEngine( 5 );
+    ControlsEngine controlEngine( 4 );
 
     MainWindow w;
 
+    w.setWindowTitle( "Mystery Number Game" );
     w.centralWidget()->setLayout( controlEngine.getLayout() );
     w.show();
 
