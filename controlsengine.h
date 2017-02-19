@@ -25,15 +25,9 @@ public:
      NumberEngine numEngine;
     QList <QLabel *>   label_list;
 
-signals:
-     void redirectData_up( QList<QLabel*> ) ;
-     void redirectData_down( QList<QLabel*> ) ;
-     void redirectData_submit( QList<QLabel*> ) ;
+     QList <QLabel *> ControlsEngine::getLabelList();
 
-public slots:
-     void sendLabelList_up(){ emit redirectData_up( label_list );}
-     void sendLabelList_down(){ emit redirectData_down( label_list );}
-     void sendLabelList_submit(){ emit redirectData_submit( label_list );}
+    QSignalMapper *signalMapper = new  QSignalMapper( this );
 
 };
 

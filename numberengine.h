@@ -22,10 +22,8 @@ public:
     QString NumberEngine::CounterUp();
     QString NumberEngine::CounterDown();
 
- public slots:
-    void handleButton_up( QList<QLabel*> label_list );
-    void handleButton_down( QList<QLabel*> label_list );
-    void handleButton_submit( QList<QLabel*> label_list );
+ signals:
+    void handleButton(QString);
 
 private:
     QString generated_number;

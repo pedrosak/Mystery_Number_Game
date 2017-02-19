@@ -36,20 +36,11 @@ ControlsEngine::ControlsEngine( int number_of_digits )
     }
 
     // Create the control buttons
-    // connecting of each button were implemented using tivial solution. Three different slots and signals for each button.
-    // Further work will be to have a signle signal/slot maping function
     QPushButton *button_up = new QPushButton ( "Up", this );
-    connect( button_up, SIGNAL ( released() ), this, SLOT ( sendLabelList_up() ));
-    connect( this, SIGNAL ( redirectData_up( QList<QLabel*> )), &numEngine, SLOT ( handleButton_up( QList<QLabel*> )));
-
     QPushButton *button_down = new QPushButton ( "Down", this );
-    connect( button_down, SIGNAL ( released() ), this, SLOT ( sendLabelList_down() ));
-    connect( this, SIGNAL ( redirectData_down( QList<QLabel*> )), &numEngine, SLOT ( handleButton_down( QList<QLabel*> )));
-
     QPushButton *button_submit = new QPushButton ( "Submit", this );
-    connect( button_submit, SIGNAL ( released() ), this, SLOT ( sendLabelList_submit() ));
-    connect( this, SIGNAL ( redirectData_submit( QList<QLabel*> )), &numEngine, SLOT ( handleButton_submit( QList<QLabel*> )));
 
+    connect( signalMapper, SIGNAL( mapped (QString ) ) , &numEngine, SIGNAL( handleButton(QString) ));
 //    button_layout->setSpacing( 0 );
 //    button_layout->setMargin( 0 );
     button_layout->addWidget( button_up, 0, Qt::AlignHCenter );
@@ -66,8 +57,10 @@ QPushButton* ControlsEngine::CreateButton( QString button_title, QString button_
 {
         QPushButton *button = new QPushButton( button_title, this );
         button->setObjectName( button_name );
-        connect( button, SIGNAL ( released()), this, SLOT ( sendLabelList() ));
-        connect( this, SIGNAL ( redirectData( QList<QLabel*> ) ), &numEngine, SLOT ( handleButton( QList<QLabel*> ) ));
+
+        connect( button, SIGNAL( clicked() ), signalMapper, SLOT( map() ) );
+        signalMapper->setMapping( button, button_title );
+
 
         return button;
 }
@@ -78,3 +71,7 @@ QLayout* ControlsEngine::getLayout()
     return gui_layout;
 }
 
+QList<QLabel *> ControlsEngine::getLabelList()
+{
+    return label_list;
+}
