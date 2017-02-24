@@ -12,23 +12,24 @@
 #include <QVBoxLayout>
 #include <QSignalMapper>
 
-class QPushButton;
+
 class ControlsEngine : public QWidget
 {
     Q_OBJECT
 public:
     explicit ControlsEngine( QWidget *parent = 0 );
     ControlsEngine::ControlsEngine( int number_of_digits );
-    QPushButton *ControlsEngine::CreateButton(QString button_title, QString button_name);
+    QPushButton *ControlsEngine::CreateButton(QString button_title);
     QLayout* ControlsEngine::getLayout();
-     QHBoxLayout *gui_layout;
-     NumberEngine numEngine;
+    QList <QLabel *> ControlsEngine::getLabelList();
+    QHBoxLayout *gui_layout;
     QList <QLabel *>   label_list;
-
-     QList <QLabel *> ControlsEngine::getLabelList();
-
     QSignalMapper *signalMapper = new  QSignalMapper( this );
 
+    enum ButtonNameHash ControlsEngine::decodeButtonName( QString button_name );
+
+public slots:
+     void handelButton(QString button );
 };
 
 #endif // CONTROLSENGINE_H

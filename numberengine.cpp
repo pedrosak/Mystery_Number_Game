@@ -36,10 +36,7 @@ void NumberEngine::randomNumberGenerator( int digit_size )
                 digit = qrand() % highNumber + lowNumber;
                 generated_number += QString("%1").arg(digit);
         }
-//        qDebug() <<  digit_size;
         qDebug() << generated_number;
-//        qDebug() << generated_number.size();
-
     }
 }
 
@@ -52,14 +49,7 @@ QString NumberEngine::getDigitAt( int digit_location )
         qDebug() << generated_number.at(digit_location);
         return generated_number.at( digit_location );
     }
-
     return 0;
-}
-
-// Returns a pointer to the generated number string
-QString* NumberEngine::getGeneratedNumber()
-{
-    return &generated_number;
 }
 
 // Sets the current working digit
@@ -75,55 +65,6 @@ void NumberEngine::setWorkingDigit( int digit_size )
         qDebug() << "Current working digit exceeds RNG digit quantity.";
     }
 }
-
-// Returns the current working digit
-inline int NumberEngine::getWorkingDigit()
-{
-    return current_working_digit;
-}
-
-void handleButton(QString &button_title)
-{
-    qDebug() << "Hey" + button_title;
-}
-
-//// Slot for the up button. Calls the CounterUp function to add one to the current counter
-//void NumberEngine::handleButton_up(QList<QLabel *> label_list)
-//{
-//    label_list.at( getWorkingDigit() )->setText( CounterUp() );
-//}
-
-//// Slot for the down button. Calls the COunterDown function to subtract one from the current counter
-//void NumberEngine::handleButton_down(QList<QLabel *> label_list)
-//{
-//    label_list.at( getWorkingDigit() )->setText( CounterDown() );
-//}
-
-
-//// Slot for the submit button. Checks current counter against the generated RN.
-//void NumberEngine::handleButton_submit(QList<QLabel *> label_list)
-//{
-//    if (label_list.at( getWorkingDigit() )->text() == generated_number.at( getWorkingDigit() ) )
-//    {
-//        // Changes color of correct number to green.
-//        // Future work will be to make a function out of this.
-//        QPalette* palette = new QPalette();
-//        palette->setColor(QPalette::WindowText,Qt::green);
-//        label_list.at( getWorkingDigit() )->setPalette( *palette);
-
-//        // If its the last digit end the game.
-//        if ( getWorkingDigit() == ( label_list.size() - 1) )
-//        {
-//            qDebug() << " Game won!";
-//            exit(1);
-//        }
-//        else
-//        {
-//            input_counter = 0;
-//            setWorkingDigit( label_list.size() - 1 );
-//        }
-//    }
-//}
 
 // Counts Up
 QString NumberEngine::CounterUp()

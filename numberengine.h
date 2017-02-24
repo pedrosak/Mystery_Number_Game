@@ -10,22 +10,19 @@
 class NumberEngine : public QObject
 {
     Q_OBJECT
+    friend class ControlsEngine;
+
 public:
     NumberEngine(void);
     ~NumberEngine(void);
     void NumberEngine::randomNumberGenerator( int digit_size );
     QString NumberEngine::getDigitAt( int digit );
     QString* NumberEngine::getGeneratedNumber();
-
     void NumberEngine::setWorkingDigit( int digit_size );
-    int NumberEngine::getWorkingDigit();
     QString NumberEngine::CounterUp();
     QString NumberEngine::CounterDown();
 
- signals:
-    void handleButton(QString);
-
-private:
+protected:
     QString generated_number;
     int digit;
     int current_working_digit =-1;
