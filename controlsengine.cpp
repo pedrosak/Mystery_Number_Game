@@ -1,10 +1,11 @@
 #include "controlsengine.h"
 #include "mainwindow.h"
 
+// Number of buttns to be created. Three buttons: Up, Down, and Submit
 #define NUMBER_OF_BUTTONS 3
 
-NumberEngine numEngine;
 
+NumberEngine numEngine;
 
 enum ButtonNameHash {
     Up = 1,
@@ -22,6 +23,9 @@ ControlsEngine::ControlsEngine( QWidget *parent) :
 }
 
 // Constructor with input to the number of digits to generate a random number with
+// The number of digits is passed in the main function. This is equal to the difficulty level.
+// More digits, the harder it is.
+// This function also creates the layout for the digits and buttons.
 ControlsEngine::ControlsEngine( int number_of_digits )
 {
      qDebug() << " Controls Engine Starting Up... vrooom";
@@ -51,9 +55,6 @@ ControlsEngine::ControlsEngine( int number_of_digits )
     QPushButton *button_down = CreateButton("Down");
     QPushButton *button_submit = CreateButton("Submit");
 
-//    button_layout->setSpacing( 0 );
-//    button_layout->setMargin( 0 );
-
     button_layout->addWidget( button_up, 0, Qt::AlignHCenter );
     button_layout->addWidget( button_down, 0, Qt::AlignHCenter );
     button_layout->addWidget( button_submit, 0, Qt::AlignHCenter);
@@ -80,13 +81,12 @@ QLayout* ControlsEngine::getLayout()
     return gui_layout;
 }
 
-QList<QLabel *> ControlsEngine::getLabelList()
-{
-    return label_list;
-}
-
+// This SLOT controls the action of each of the buttons. If the up button is pressed
+// the current digit will increase. If down button is pressed the current digit decreases.
+// If the submit button is pressed the current button is checked agains the mystery number.
 void ControlsEngine::handelButton( QString button )
 {
+    // Switch case to determin which button was pressed.
     switch ( ControlsEngine::decodeButtonName( button )) {
     case 1:
         label_list.at( numEngine.current_working_digit )->setText( numEngine.CounterUp() );
@@ -117,11 +117,14 @@ void ControlsEngine::handelButton( QString button )
             }
         break;
     default:
-        qDebug () << "You pressed other than Up";
+        // There should not be any other possible 'button' passed.
+        qDebug () << "Something went wrong.";
         break;
     }
 }
 
+// This function matches each button name to an enum and returns that
+// enum.
 ButtonNameHash ControlsEngine::decodeButtonName( QString button_name )
 {
     if ( button_name == "Up")

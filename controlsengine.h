@@ -21,12 +21,11 @@ public:
     ControlsEngine::ControlsEngine( int number_of_digits );
     QPushButton *ControlsEngine::CreateButton(QString button_title);
     QLayout* ControlsEngine::getLayout();
-    QList <QLabel *> ControlsEngine::getLabelList();
+    enum ButtonNameHash ControlsEngine::decodeButtonName( QString button_name );
+
     QHBoxLayout *gui_layout;
     QList <QLabel *>   label_list;
     QSignalMapper *signalMapper = new  QSignalMapper( this );
-
-    enum ButtonNameHash ControlsEngine::decodeButtonName( QString button_name );
 
 public slots:
      void handelButton(QString button );
